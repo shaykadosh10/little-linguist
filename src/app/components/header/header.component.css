@@ -1,0 +1,8 @@
+.toolbar-icons {
+  flex: 1 1 auto;
+  margin: auto;
+}
+.toolbar-icon {
+  padding-left: 8px;
+}
+

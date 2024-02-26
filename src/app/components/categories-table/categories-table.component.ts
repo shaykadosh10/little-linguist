@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
-import { WordCategory } from '../../../shared/model/Word-category';
-import { Language } from '../../../shared/model/Language';
-import { TranslatedWord } from '../../../shared/model/Translated-word ';
+import { WordCategory } from '../../shared/model/Word-category';
+import { Language } from '../../shared/model/Language';
+import { TranslatedWord } from '../../shared/model/Translated-word ';
 
 @Component({
   selector: 'app-categories-table',
@@ -35,13 +35,13 @@ export class CategoriesTableComponent {
     new WordCategory(
       'Colors',
       2,
-      new Date (),
+      new Date(),
       Language.Hebrew,
       Language.English,
       [
-        new TranslatedWord ('אדום','Red'),
-        new TranslatedWord ('כחול','Blue'),
-        new TranslatedWord ('ירוק','Green')
+        new TranslatedWord('אדום', 'Red'),
+        new TranslatedWord('כחול', 'Blue'),
+        new TranslatedWord('ירוק', 'Green'),
       ]
     ),
     new WordCategory(
@@ -57,5 +57,4 @@ export class CategoriesTableComponent {
       ]
     ),
   ];
-
 }

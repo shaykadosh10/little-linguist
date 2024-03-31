@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
-import { CategoriesTableComponent } from './components/categories-table/categories-table.component';
 import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
@@ -10,14 +9,8 @@ import { FooterComponent } from './components/footer/footer.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    HeaderComponent,
-    CategoriesTableComponent,
-    FooterComponent,
-  ],
+  imports: [RouterModule, CommonModule, HeaderComponent, FooterComponent],
 })
 export class AppComponent {
-  title = 'hello-world';
+  title = 'Little Linguist';
 }

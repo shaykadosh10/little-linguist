@@ -4,11 +4,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { WordCategory } from '../../shared/model/Word-category';
 import { Language } from '../../shared/model/Language';
 import { TranslatedWord } from '../../shared/model/Translated-word ';
+import { CategoryServiceModule } from '../../service/category-service/category-service.module';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-categories-table',
   standalone: true,
-  imports: [MatTableModule, MatIconModule],
+  imports: [CategoryServiceModule, RouterLink, MatTableModule, MatIconModule],
   templateUrl: './categories-table.component.html',
   styleUrl: './categories-table.component.css',
 })
@@ -19,42 +21,21 @@ export class CategoriesTableComponent {
     'lastEditDate',
     'actions',
   ];
-  categories = [
-    new WordCategory(
-      'Animals',
-      1,
-      new Date(),
-      Language.Hebrew,
-      Language.English,
-      [
-        new TranslatedWord('כלב', 'Dog'),
-        new TranslatedWord('חתול', 'Cat'),
-        new TranslatedWord('ציפור', 'Bird'),
-      ]
-    ),
-    new WordCategory(
-      'Colors',
-      2,
-      new Date(),
-      Language.Hebrew,
-      Language.English,
-      [
-        new TranslatedWord('אדום', 'Red'),
-        new TranslatedWord('כחול', 'Blue'),
-        new TranslatedWord('ירוק', 'Green'),
-      ]
-    ),
-    new WordCategory(
-      'Numbers',
-      3,
-      new Date(),
-      Language.Hebrew,
-      Language.English,
-      [
-        new TranslatedWord('אחד', 'One'),
-        new TranslatedWord('שתיים', 'Two'),
-        new TranslatedWord('שלוש', 'Three'),
-      ]
-    ),
-  ];
+  categories: WordCategory[] = [];
+
+  constructor(private categoryService: CategoryServiceModule) {}
+
+  ngOnInit() {
+    this.refreshCategories();
+  }
+
+  refreshCategories() {
+    this.categories = this.categoryService.getAllCategories();
+  }
+
+  deleteCategory(categoryId: WordCategory['id']) {
+    this.categoryService.deleteCategory(categoryId);
+
+    this.refreshCategories();
+  }
 }

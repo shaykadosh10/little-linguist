@@ -1,0 +1,64 @@
+<form #categoryForm="ngForm">
+  <div>
+    <mat-form-field>
+      <mat-label>Category ID</mat-label>
+      <input matInput disabled [(ngModel)]="category.id" name="id" />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Category Name</mat-label>
+      <input
+        matInput
+        required
+        [(ngModel)]="category.categoryName"
+        name="categoryName"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Source Language</mat-label>
+      <input
+        matInput
+        required
+        disabled
+        [(ngModel)]="category.sourceLanguage"
+        name="sourceLanguage"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Target Language</mat-label>
+      <input
+        matInput
+        required
+        disabled
+        [(ngModel)]="category.targetLanguage"
+        name="targetLanguage"
+      />
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <mat-label>Words</mat-label>
+      <input
+        matInput
+        required
+        name="words"
+        [(ngModel)]="category.words"
+        [matAutocomplete]="auto"
+      />
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (option of ['1', '2', '3']; track option) {
+        <mat-option [value]="option">{{ option }}</mat-option>
+        }
+      </mat-autocomplete>
+    </mat-form-field>
+  </div>
+</form>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { WordCategory } from '../../shared/model/Word-category';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -29,6 +29,7 @@ export class FormComponent {
   };
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private categoryService: CategoryServiceModule
@@ -53,7 +54,25 @@ export class FormComponent {
       // Only if category exists
       if (category) {
         this.category = category;
+
+        this.category.lastUpdated = new Date();
       }
+    }
+  }
+
+  saveCategory() {
+    console.log('Category saved:', this.category);
+
+    // Validation
+
+    if (this.categoryId) {
+      if (this.categoryService.getCategoryById(+this.categoryId)) {
+        this.categoryService.updateCategory(this.category as WordCategory);
+      } else {
+        this.categoryService.addCategory(this.category as WordCategory);
+      }
+
+      this.router.navigate(['/']);
     }
   }
 }

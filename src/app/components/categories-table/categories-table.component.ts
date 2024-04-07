@@ -18,7 +18,7 @@ export class CategoriesTableComponent {
   displayedColumns: string[] = [
     'categoryName',
     'words',
-    'lastEditDate',
+    'lastUpdated',
     'actions',
   ];
   categories: WordCategory[] = [];

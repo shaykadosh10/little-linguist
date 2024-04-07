@@ -10,7 +10,7 @@ import { TranslatedWord } from '../../shared/model/Translated-word ';
 })
 export class CategoryServiceModule {
   private categoryMap = new Map<WordCategory['id'], WordCategory>();
-  private currentCategoryId = 0;
+  private currentCategoryId = 1;
 
   constructor() {
     const categories = [
@@ -45,7 +45,7 @@ export class CategoryServiceModule {
         Language.Hebrew,
         Language.English,
         [
-          new TranslatedWord('אחד', 'One'),
+        new TranslatedWord('אחד', 'One'),
           new TranslatedWord('שתיים', 'Two'),
           new TranslatedWord('שלוש', 'Three'),
         ]
@@ -64,8 +64,9 @@ export class CategoryServiceModule {
   }
 
   updateCategory(category: WordCategory) {
-    category.lastEditDate = new Date();
+    category.lastUpdated = new Date();
 
+    console.log('update', category.lastUpdated);
     this.categoryMap.set(category.id, category);
   }
 

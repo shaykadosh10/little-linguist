@@ -5,7 +5,7 @@ export class WordCategory {
   constructor(
     public categoryName: string,
     public id: number,
-    public lastEditDate: Date,
+    public lastUpdated: Date,
     public sourceLanguage: Language,
     public targetLanguage: Language,
     public words: TranslatedWord[]

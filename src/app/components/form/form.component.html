@@ -61,4 +61,13 @@
       </mat-autocomplete>
     </mat-form-field>
   </div>
+
+ <div>
+    <mat-form-field> 
+    <mat-label> Last Update </mat-label>
+    <input matInput disabled [(ngModel)]="category.lastUpdated" name="lastUpdated"/>
+  </mat-form-field>
+  </div>
+
+  <button mat-button color="primary" (click)="saveCategory()">save</button>
 </form>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { WordCategory } from '../../shared/model/Word-category';
@@ -7,25 +7,30 @@ import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Language } from '../../shared/model/Language';
 import { CategoryServiceModule } from '../../service/category-service/category-service.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslatedWord } from '../../shared/model/Translated-word ';
 
 @Component({
   selector: 'app-form',
   standalone: true,
   imports: [
-    CategoryServiceModule,
     FormsModule,
+    MatButtonModule,
+    MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatAutocompleteModule,
   ],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.css',
+  styleUrl: './form.component.scss',
 })
-export class FormComponent {
+export class FormComponent implements OnInit {
   private categoryId: string | null = null;
   category: Partial<WordCategory> = {
     sourceLanguage: Language.English,
     targetLanguage: Language.Hebrew,
+    words: [],
   };
 
   constructor(
@@ -33,9 +38,7 @@ export class FormComponent {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private categoryService: CategoryServiceModule
-  ) {
-    console.log(this.fb);
-  }
+  ) {}
 
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -45,6 +48,11 @@ export class FormComponent {
         this.loadCategory();
       }
     });
+  }
+
+  addWord() {
+    console.log('add word');
+    this.category.words?.push(new TranslatedWord());
   }
 
   loadCategory() {

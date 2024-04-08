@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-categories-table',
   standalone: true,
-  imports: [CategoryServiceModule, RouterLink, MatTableModule, MatIconModule],
+  imports: [RouterLink, MatTableModule, MatIconModule],
   templateUrl: './categories-table.component.html',
   styleUrl: './categories-table.component.css',
 })
@@ -21,7 +21,7 @@ export class CategoriesTableComponent {
     'lastUpdated',
     'actions',
   ];
-  categories: WordCategory[] = [];
+  categories: WordCategory[] = this.categoryService.getAllCategories();
 
   constructor(private categoryService: CategoryServiceModule) {}
 

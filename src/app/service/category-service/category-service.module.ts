@@ -1,12 +1,11 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WordCategory } from '../../shared/model/Word-category';
 import { Language } from '../../shared/model/Language';
 import { TranslatedWord } from '../../shared/model/Translated-word ';
 
-@NgModule({
-  declarations: [],
-  imports: [CommonModule],
+@Injectable({
+  providedIn: 'root',
 })
 export class CategoryServiceModule {
   private categoryMap = new Map<WordCategory['id'], WordCategory>();
@@ -16,7 +15,6 @@ export class CategoryServiceModule {
     const categories = [
       new WordCategory(
         'Animals',
-        1,
         new Date(),
         Language.Hebrew,
         Language.English,
@@ -28,7 +26,6 @@ export class CategoryServiceModule {
       ),
       new WordCategory(
         'Colors',
-        2,
         new Date(),
         Language.Hebrew,
         Language.English,
@@ -40,12 +37,11 @@ export class CategoryServiceModule {
       ),
       new WordCategory(
         'Numbers',
-        3,
         new Date(),
         Language.Hebrew,
         Language.English,
         [
-        new TranslatedWord('אחד', 'One'),
+          new TranslatedWord('אחד', 'One'),
           new TranslatedWord('שתיים', 'Two'),
           new TranslatedWord('שלוש', 'Three'),
         ]
@@ -64,7 +60,9 @@ export class CategoryServiceModule {
   }
 
   updateCategory(category: WordCategory) {
+    console.log('old date', category.lastUpdated);
     category.lastUpdated = new Date();
+    console.log('new date', category.lastUpdated);
 
     console.log('update', category.lastUpdated);
     this.categoryMap.set(category.id, category);

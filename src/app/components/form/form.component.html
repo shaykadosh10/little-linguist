@@ -1,12 +1,12 @@
-<form #categoryForm="ngForm">
-  <div>
+<form #categoryForm="ngForm" class="form">
+  <div class="form__field">
     <mat-form-field>
       <mat-label>Category ID</mat-label>
       <input matInput disabled [(ngModel)]="category.id" name="id" />
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="form__field">
     <mat-form-field>
       <mat-label>Category Name</mat-label>
       <input
@@ -18,7 +18,7 @@
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="form__field">
     <mat-form-field>
       <mat-label>Source Language</mat-label>
       <input
@@ -31,7 +31,7 @@
     </mat-form-field>
   </div>
 
-  <div>
+  <div class="form__field">
     <mat-form-field>
       <mat-label>Target Language</mat-label>
       <input
@@ -44,9 +44,8 @@
     </mat-form-field>
   </div>
 
-  <div>
+  <!-- <div class="form__field">
     <mat-form-field>
-      <mat-label>Words</mat-label>
       <input
         matInput
         required
@@ -60,14 +59,51 @@
         }
       </mat-autocomplete>
     </mat-form-field>
+  </div> -->
+
+  <div class="form__words">
+    <div class="form__words-header">
+      <mat-label>Words</mat-label>
+      <button
+        mat-fab
+        color="primary"
+        class="form__words-header-button"
+        (click)="addWord()"
+      >
+        +
+      </button>
+    </div>
+    @for (option of category.words; track option; let i = $index) {
+    <div class="form__words-content">
+      <mat-form-field>
+        <mat-label>Source Word</mat-label>
+        <input
+          matInput
+          required
+          [(ngModel)]="option.sourceWord"
+          name="sourceWord"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Target Word</mat-label>
+        <input
+          matInput
+          required
+          [(ngModel)]="option.targetWord"
+          name="targetWord"
+        />
+      </mat-form-field>
+    </div>
+    }
   </div>
 
- <div>
-    <mat-form-field> 
-    <mat-label> Last Update </mat-label>
-    <input matInput disabled [(ngModel)]="category.lastUpdated" name="lastUpdated"/>
-  </mat-form-field>
-  </div>
-
-  <button mat-button color="primary" (click)="saveCategory()">save</button>
+  <button
+    mat-button
+    mat-raised-button
+    color="primary"
+    (click)="saveCategory()"
+    class="form__save-button"
+  >
+    save
+  </button>
 </form>

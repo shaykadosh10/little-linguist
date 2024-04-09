@@ -16,34 +16,34 @@ export class CategoryServiceModule {
       new WordCategory(
         'Animals',
         new Date(),
-        Language.Hebrew,
         Language.English,
+        Language.Hebrew,
         [
-          new TranslatedWord('כלב', 'Dog'),
-          new TranslatedWord('חתול', 'Cat'),
-          new TranslatedWord('ציפור', 'Bird'),
+          new TranslatedWord('Dog', 'כלב'),
+          new TranslatedWord('Cat', 'חתול'),
+          new TranslatedWord('Bird', 'ציפור'),
         ]
       ),
       new WordCategory(
         'Colors',
         new Date(),
-        Language.Hebrew,
         Language.English,
+        Language.Hebrew,
         [
-          new TranslatedWord('אדום', 'Red'),
-          new TranslatedWord('כחול', 'Blue'),
-          new TranslatedWord('ירוק', 'Green'),
+          new TranslatedWord('Red', 'אדום'),
+          new TranslatedWord('Blue', 'כחול'),
+          new TranslatedWord('Green', 'ירוק'),
         ]
       ),
       new WordCategory(
         'Numbers',
         new Date(),
-        Language.Hebrew,
         Language.English,
+        Language.Hebrew,
         [
-          new TranslatedWord('אחד', 'One'),
-          new TranslatedWord('שתיים', 'Two'),
-          new TranslatedWord('שלוש', 'Three'),
+          new TranslatedWord('One', 'אחד'),
+          new TranslatedWord('Two', 'שתיים'),
+          new TranslatedWord('Three', 'שלוש'),
         ]
       ),
     ];

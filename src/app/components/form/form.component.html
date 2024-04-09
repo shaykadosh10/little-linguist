@@ -13,8 +13,14 @@
         matInput
         required
         [(ngModel)]="category.categoryName"
+        (ngModelChange)="validateLanguage(category.categoryName || '')"
+        pattern="^[a-zA-Z]*$"
+        #categoryName="ngModel"
         name="categoryName"
       />
+      <mat-error *ngIf="categoryName.invalid">
+        Please enter a valid (in english) category name
+      </mat-error>
     </mat-form-field>
   </div>
 
@@ -81,18 +87,49 @@
           matInput
           required
           [(ngModel)]="option.sourceWord"
-          name="sourceWord"
+          (ngModelChange)="
+            !validateLanguage(option, 'source') &&
+              !validateDuplicates(option, 'source')
+          "
+          [pattern]="getLanguagePattern('source')"
+          [name]="'sourceWord' + i"
+          #sourceWord="ngModel"
         />
+        <mat-error
+          *ngIf="!validateDuplicates(option, 'source') || sourceWord.invalid"
+        >
+          Please enter a valid and nonexistent word
+        </mat-error>
       </mat-form-field>
       <mat-form-field>
         <mat-label>Target Word</mat-label>
         <input
           matInput
           required
+          (error)="(true)"
           [(ngModel)]="option.targetWord"
-          name="targetWord"
+          (ngModelChange)="
+            !validateLanguage(option, 'target') &&
+              !validateDuplicates(option, 'target')
+          "
+          [name]="'targetWord' + i"
+          [pattern]="getLanguagePattern('target')"
+          #targetWord="ngModel"
         />
+        <mat-error
+          *ngIf="!validateDuplicates(option, 'target') || targetWord.invalid"
+        >
+          Please enter a valid and nonexistent word
+        </mat-error>
       </mat-form-field>
+      <button
+        mat-fab
+        color="red"
+        class="form__words-header-delete-button"
+        (click)="deleteWord(option)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
     </div>
     }
   </div>

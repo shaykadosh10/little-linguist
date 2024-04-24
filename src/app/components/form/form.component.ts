@@ -106,35 +106,11 @@ export class FormComponent implements OnInit {
         ? word
         : word[languageType === 'source' ? 'sourceWord' : 'targetWord'];
 
+    console.log(wordString);
+
     let regex = new RegExp(this.getLanguagePattern(languageType));
 
-    if (!regex.test(wordString)) {
-      return true;
-    }
-
-    return false;
-  }
-
-  validateDuplicates(word: TranslatedWord, languageType: 'source' | 'target') {
-    for (const word2 of this.category.words || []) {
-      if (
-        word !== word2 &&
-        word[languageType === 'source' ? 'sourceWord' : 'targetWord'] ===
-          word2[languageType === 'source' ? 'sourceWord' : 'targetWord']
-      ) {
-        // if (word instanceof TranslatedWord) {
-        //   if (languageType === 'source') {
-        //     this.sourceWordErrors.set(word, 'This word already exists!');
-        //   } else if (languageType === 'target') {
-        //     this.targetWordErrors.set(word, 'This word already exists!');
-        //   }
-        // }
-
-        return false;
-      }
-    }
-
-    return true;
+    return regex.test(wordString);
   }
 
   saveCategory() {
@@ -160,6 +136,8 @@ export class FormComponent implements OnInit {
         break;
       }
     }
+
+    console.log(errors);
 
     if (!errors) {
       if (

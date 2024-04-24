@@ -87,16 +87,13 @@
           matInput
           required
           [(ngModel)]="option.sourceWord"
-          (ngModelChange)="
-            !validateLanguage(option, 'source') &&
-              !validateDuplicates(option, 'source')
-          "
+          (ngModelChange)="!validateLanguage(option, 'source')"
           [pattern]="getLanguagePattern('source')"
           [name]="'sourceWord' + i"
           #sourceWord="ngModel"
         />
         <mat-error
-          *ngIf="!validateDuplicates(option, 'source') || sourceWord.invalid"
+          *ngIf="sourceWord.invalid"
         >
           Please enter a valid and nonexistent word
         </mat-error>
@@ -108,16 +105,13 @@
           required
           (error)="(true)"
           [(ngModel)]="option.targetWord"
-          (ngModelChange)="
-            !validateLanguage(option, 'target') &&
-              !validateDuplicates(option, 'target')
-          "
+          (ngModelChange)="!validateLanguage(option, 'target')"
           [name]="'targetWord' + i"
           [pattern]="getLanguagePattern('target')"
           #targetWord="ngModel"
         />
         <mat-error
-          *ngIf="!validateDuplicates(option, 'target') || targetWord.invalid"
+          *ngIf="targetWord.invalid"
         >
           Please enter a valid and nonexistent word
         </mat-error>

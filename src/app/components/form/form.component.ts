@@ -34,6 +34,7 @@ export class FormComponent implements OnInit {
     targetLanguage: Language.Hebrew,
     words: [],
   };
+  noWordsError: boolean = false;
 
   constructor(
     private router: Router,
@@ -106,15 +107,13 @@ export class FormComponent implements OnInit {
         ? word
         : word[languageType === 'source' ? 'sourceWord' : 'targetWord'];
 
-    console.log(wordString);
-
     let regex = new RegExp(this.getLanguagePattern(languageType));
 
     return regex.test(wordString);
   }
 
   saveCategory() {
-    console.log('Category saved:', this.category);
+    this.noWordsError = false;
     let errors = false;
 
     if (
@@ -124,7 +123,14 @@ export class FormComponent implements OnInit {
       errors = true;
     }
 
-    for (const word of this.category.words || []) {
+    const words = this.category.words || [];
+
+    if (words.length <= 0) {
+      errors = true;
+      this.noWordsError = true;
+    }
+
+    for (const word of words) {
       if (
         !word.sourceWord ||
         !word.targetWord ||
@@ -136,8 +142,6 @@ export class FormComponent implements OnInit {
         break;
       }
     }
-
-    console.log(errors);
 
     if (!errors) {
       if (

@@ -30,12 +30,32 @@ export class CategoriesTableComponent {
   }
 
   refreshCategories() {
-    this.categories = this.categoryService.getAllCategories();
+    this.categories = this.categoryService.getAllCategories().sort((c1, c2) => {
+      const nameCompare = c1.categoryName.localeCompare(c2.categoryName);
+
+      if (nameCompare === 0) {
+        const wordCompare = c2.words.length - c1.words.length;
+
+        if (wordCompare === 0) {
+          return c2.lastUpdated.getTime() - c1.lastUpdated.getTime();
+        }
+
+        return wordCompare;
+      }
+
+      return nameCompare;
+    });
   }
 
   deleteCategory(categoryId: WordCategory['id']) {
-    this.categoryService.deleteCategory(categoryId);
+    const shouldDelete = confirm(
+      'Are you sure you want to delete this category?'
+    );
 
-    this.refreshCategories();
+    if (shouldDelete) {
+      this.categoryService.deleteCategory(categoryId);
+
+      this.refreshCategories();
+    }
   }
 }

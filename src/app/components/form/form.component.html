@@ -92,9 +92,7 @@
           [name]="'sourceWord' + i"
           #sourceWord="ngModel"
         />
-        <mat-error
-          *ngIf="sourceWord.invalid"
-        >
+        <mat-error *ngIf="sourceWord.invalid">
           Please enter a valid and nonexistent word
         </mat-error>
       </mat-form-field>
@@ -110,9 +108,7 @@
           [pattern]="getLanguagePattern('target')"
           #targetWord="ngModel"
         />
-        <mat-error
-          *ngIf="targetWord.invalid"
-        >
+        <mat-error *ngIf="targetWord.invalid">
           Please enter a valid and nonexistent word
         </mat-error>
       </mat-form-field>
@@ -128,6 +124,9 @@
     }
   </div>
 
+  <span *ngIf="noWordsError" class="error-message"
+    >You must have at least one word in the category</span
+  >
   <button
     mat-button
     mat-raised-button
